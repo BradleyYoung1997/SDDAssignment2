@@ -79,17 +79,14 @@ public class QRTAEntryForm extends javax.swing.JFrame {
         accidentPanel = new JPanel();
         jLabel1 = new JLabel();
         LocationLabel = new JLabel();
-        IDLabel = new JLabel();
         NumPlateLabel = new JLabel();
         commentLabel = new JLabel();
         jScrollPane7 = new JScrollPane();
         jTextPane1 = new JTextPane();
         jScrollPane8 = new JScrollPane();
-        jTextPane2 = new JTextPane();
+        AccComments = new JTextPane();
         jScrollPane9 = new JScrollPane();
         jTextPane3 = new JTextPane();
-        jScrollPane10 = new JScrollPane();
-        jTextPane4 = new JTextPane();
         newAccidentButton = new JButton();
         accSearchButton = new JButton();
         NumPlateLabel1 = new JLabel();
@@ -234,7 +231,7 @@ public class QRTAEntryForm extends javax.swing.JFrame {
                 .addComponent(updateVehicle)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchButton)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         accidentPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.gray, Color.lightGray, null, null));
@@ -245,9 +242,6 @@ public class QRTAEntryForm extends javax.swing.JFrame {
         LocationLabel.setFont(new Font("Tahoma", 0, 15)); // NOI18N
         LocationLabel.setText("Location");
 
-        IDLabel.setFont(new Font("Tahoma", 0, 15)); // NOI18N
-        IDLabel.setText("Incident ID");
-
         NumPlateLabel.setFont(new Font("Tahoma", 0, 15)); // NOI18N
         NumPlateLabel.setText("Vehicle Number Plate");
 
@@ -256,11 +250,9 @@ public class QRTAEntryForm extends javax.swing.JFrame {
 
         jScrollPane7.setViewportView(jTextPane1);
 
-        jScrollPane8.setViewportView(jTextPane2);
+        jScrollPane8.setViewportView(AccComments);
 
         jScrollPane9.setViewportView(jTextPane3);
-
-        jScrollPane10.setViewportView(jTextPane4);
 
         newAccidentButton.setText("Add Accident");
         newAccidentButton.addActionListener(new ActionListener() {
@@ -285,28 +277,26 @@ public class QRTAEntryForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(accidentPanelLayout.createSequentialGroup()
-                        .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(NumPlateLabel)
-                            .addComponent(jLabel1)
-                            .addComponent(IDLabel, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LocationLabel, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(commentLabel, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane7, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                            .addComponent(jScrollPane8)
-                            .addComponent(jScrollPane9)
-                            .addComponent(jScrollPane10)))
+                        .addComponent(LocationLabel, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jScrollPane9, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
                     .addGroup(accidentPanelLayout.createSequentialGroup()
                         .addComponent(NumPlateLabel1)
                         .addGap(57, 57, 57)
                         .addComponent(jScrollPane11))
                     .addGroup(accidentPanelLayout.createSequentialGroup()
+                        .addComponent(NumPlateLabel)
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane7, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                    .addGroup(accidentPanelLayout.createSequentialGroup()
                         .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addComponent(newAccidentButton)
                             .addComponent(accSearchButton)
-                            .addComponent(UpdateAccident))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(UpdateAccident)
+                            .addComponent(commentLabel, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
+                        .addGap(68, 68, 68)
+                        .addComponent(jScrollPane8)))
                 .addContainerGap())
         );
         accidentPanelLayout.setVerticalGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -314,34 +304,33 @@ public class QRTAEntryForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(LocationLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                     .addGroup(accidentPanelLayout.createSequentialGroup()
-                        .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addGroup(accidentPanelLayout.createSequentialGroup()
-                                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(IDLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(LocationLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(commentLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(NumPlateLabel1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(7, 7, 7)
+                        .addComponent(NumPlateLabel1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(NumPlateLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addGroup(accidentPanelLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(accidentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(accidentPanelLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(commentLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newAccidentButton)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UpdateAccident)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(accSearchButton)
-                .addGap(25, 25, 25))
+                .addGap(71, 71, 71))
         );
 
         jButton1.setBackground(Color.red);
@@ -397,7 +386,7 @@ public class QRTAEntryForm extends javax.swing.JFrame {
                     .addComponent(vehicleEntry, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane13, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                    .addComponent(jScrollPane13, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(jScrollPane12))
                 .addContainerGap())
         );
@@ -461,7 +450,7 @@ public class QRTAEntryForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JLabel IDLabel;
+    private JTextPane AccComments;
     private JLabel LocationLabel;
     private JTextPane NumEntry;
     private JLabel NumPlateLabel;
@@ -480,7 +469,6 @@ public class QRTAEntryForm extends javax.swing.JFrame {
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JScrollPane jScrollPane1;
-    private JScrollPane jScrollPane10;
     private JScrollPane jScrollPane11;
     private JScrollPane jScrollPane12;
     private JScrollPane jScrollPane13;
@@ -495,9 +483,7 @@ public class QRTAEntryForm extends javax.swing.JFrame {
     private JTextArea jTextArea1;
     private JTextArea jTextArea2;
     private JTextPane jTextPane1;
-    private JTextPane jTextPane2;
     private JTextPane jTextPane3;
-    private JTextPane jTextPane4;
     private JTextPane jTextPane5;
     private JTextPane modelEntry;
     private JLabel modelLabel;
