@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Bradey
@@ -12,9 +14,7 @@ package Model;
  */
 public interface AccidentInterface 
 {
+    public int IDInsert(int Acc_ID);
     public int locInsert(String location);
-    public int commInsert(String comments);
-    public int vehcileInsert(int numVehicles);
-    public int plateInsert(String numPlates);
-    
+    public int commInsert(String comments);   
 }

@@ -19,9 +19,9 @@ import java.sql.SQLException;
 public class VehicleModel implements VehicleInterface
 {
 
-    String URL = "jdbc:derby://localhost:1527/QRTADatabase";
-    String Username = "Test";
-    String Password = "1234";
+    final String URL = "jdbc:derby://localhost:1527/QRTADatabase";
+    final String USERNAME = "Test";
+    final String PASSWORD = "1234";
     Connection c = null;
     public int plateInsert(String numPlate) 
     {
@@ -29,13 +29,13 @@ public class VehicleModel implements VehicleInterface
         {
             PreparedStatement insertNewPlate = null;
             
-            c = DriverManager.getConnection(URL, Username, Password);
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertNewPlate = c.prepareStatement(
-                    "INSERT INTO QRTADatabase.VEHICLE(VEHICLE_ID) VALUES"
+                    "INSERT INTO TEST.VEHICLE(VEHICLE_ID) VALUES"
                             + "('"+numPlate+"')");
             insertNewPlate.executeUpdate();
             insertNewPlate = c.prepareStatement(
-                    "INSERT INTO QRTADatabase.ACCIDENT_VEHICLE(VEHICLE_ID)"
+                    "INSERT INTO TEST.ACCIDENT_VEHICLE(VEHICLE_ID)"
                             + "VALUES ('"+numPlate+"')");
             insertNewPlate.executeUpdate();
         }
@@ -54,9 +54,9 @@ public class VehicleModel implements VehicleInterface
         {
             PreparedStatement insertNewModel = null;
             
-            c = DriverManager.getConnection(URL, Username, Password);
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertNewModel = c.prepareStatement(
-                  "INSERT INTO QRTADatabase.VEHICLE(MODLE) VALUES('"+model+"')");
+                  "INSERT INTO TEST.VEHICLE(MODLE) VALUES('"+model+"')");
             insertNewModel.executeUpdate();  
         }
         catch(SQLException e)
@@ -74,9 +74,10 @@ public class VehicleModel implements VehicleInterface
         {
             PreparedStatement insertNewYear = null;
             
-            c = DriverManager.getConnection(URL, Username, Password);
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertNewYear = c.prepareStatement(
-            "INSERT INTO QRTADatabase.VEHICLE(MAKE_YEAR) VALUES("+year+"')");
+            "INSERT INTO TEST.VEHICLE(MAKE_YEAR) VALUES("+year+"')");
+            insertNewYear.executeUpdate();
         }
         catch(SQLException e)
         {
@@ -93,9 +94,10 @@ public class VehicleModel implements VehicleInterface
         {
             PreparedStatement insertNewOwner = null;
             
-            c = DriverManager.getConnection(URL, Username, Password);
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertNewOwner = c.prepareStatement(
-            "INSERT INTO QRTADatabase.VEHICLE(OWNER_NAME) VALUES("+owner+"')");
+            "INSERT INTO TEST.VEHICLE(OWNER_NAME) VALUES("+owner+"')");
+            insertNewOwner.executeUpdate();
         }
         catch(SQLException e)
         {
@@ -112,9 +114,10 @@ public class VehicleModel implements VehicleInterface
         {
             PreparedStatement insertNewAddress = null;
             
-            c = DriverManager.getConnection(URL, Username, Password);
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertNewAddress = c.prepareStatement(
-            "INSERT INTO QRTADatabase.VEHICLE(ADDRESS) VALUES("+address+"')");
+            "INSERT INTO TEST.VEHICLE(ADDRESS) VALUES("+address+"')");
+            insertNewAddress.executeUpdate();
         }
         catch(SQLException e)
         {
@@ -131,9 +134,10 @@ public class VehicleModel implements VehicleInterface
         {
             PreparedStatement insertNewPhone = null;
             
-            c = DriverManager.getConnection(URL, Username, Password);
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertNewPhone = c.prepareStatement(
-            "INSERT INTO QRTADatabase.VEHICLE(PHONE) VALUES("+phone+"')");
+            "INSERT INTO TEST.VEHICLE(PHONE) VALUES("+phone+"')");
+            insertNewPhone.executeUpdate();
         }
         catch(SQLException e)
         {
