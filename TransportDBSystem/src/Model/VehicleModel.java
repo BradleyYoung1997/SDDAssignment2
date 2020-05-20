@@ -45,7 +45,15 @@ public class VehicleModel implements VehicleInterface
     
     public int modelInsert(String model) 
     {
-        
+        try
+        {
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     
