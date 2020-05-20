@@ -1,3 +1,5 @@
+package Model;
+
 /*
  * Author: Bradley Young 12110283
  * Date:
