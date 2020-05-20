@@ -31,7 +31,12 @@ public class VehicleModel implements VehicleInterface
             
             c = DriverManager.getConnection(URL, Username, Password);
             insertNewPlate = c.prepareStatement(
-                    "INSERT INTO QRTADatabase.VEHICLE(VEHICLE_ID) VALUES('"+numPlate+"')");
+                    "INSERT INTO QRTADatabase.VEHICLE(VEHICLE_ID) VALUES"
+                            + "('"+numPlate+"')");
+            insertNewPlate.executeUpdate();
+            insertNewPlate = c.prepareStatement(
+                    "INSERT INTO QRTADatabase.ACCIDENT_VEHICLE(VEHICLE_ID)"
+                            + "VALUES ('"+numPlate+"')");
             insertNewPlate.executeUpdate();
         }
         catch(SQLException e)
@@ -47,33 +52,95 @@ public class VehicleModel implements VehicleInterface
     {
         try
         {
+            PreparedStatement insertNewModel = null;
             
+            c = DriverManager.getConnection(URL, Username, Password);
+            insertNewModel = c.prepareStatement(
+                  "INSERT INTO QRTADatabase.VEHICLE(MODLE) VALUES('"+model+"')");
+            insertNewModel.executeUpdate();  
         }
         catch(SQLException e)
         {
             e.printStackTrace();
             System.exit(1);
         }
+        return 0;
     }
 
     
-    public int yearInsert(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int yearInsert(int year) 
+    {
+        try
+        {
+            PreparedStatement insertNewYear = null;
+            
+            c = DriverManager.getConnection(URL, Username, Password);
+            insertNewYear = c.prepareStatement(
+            "INSERT INTO QRTADatabase.VEHICLE(MAKE_YEAR) VALUES("+year+"')");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return 0;
     }
 
     
-    public int ownerInsert(String owner) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int ownerInsert(String owner) 
+    {
+        try
+        {
+            PreparedStatement insertNewOwner = null;
+            
+            c = DriverManager.getConnection(URL, Username, Password);
+            insertNewOwner = c.prepareStatement(
+            "INSERT INTO QRTADatabase.VEHICLE(OWNER_NAME) VALUES("+owner+"')");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return 0;
     }
 
     
-    public int addressInsert(String address) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int addressInsert(String address) 
+    {
+        try
+        {
+            PreparedStatement insertNewAddress = null;
+            
+            c = DriverManager.getConnection(URL, Username, Password);
+            insertNewAddress = c.prepareStatement(
+            "INSERT INTO QRTADatabase.VEHICLE(ADDRESS) VALUES("+address+"')");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return 0;
     }
 
     
-    public int phoneInsert(long phone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int phoneInsert(long phone) 
+    {
+        try
+        {
+            PreparedStatement insertNewPhone = null;
+            
+            c = DriverManager.getConnection(URL, Username, Password);
+            insertNewPhone = c.prepareStatement(
+            "INSERT INTO QRTADatabase.VEHICLE(PHONE) VALUES("+phone+"')");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return 0;
     }
 
 }
