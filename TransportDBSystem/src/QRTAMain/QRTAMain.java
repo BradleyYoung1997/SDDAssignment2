@@ -6,6 +6,8 @@
 
 package QRTAMain;
 
+import Model.AccidentInterface;
+import Model.AccidentModel;
 import Model.VehicleModel;
 import Model.VMInterface;
 import Presenter.Presenter;
@@ -26,9 +28,10 @@ public class QRTAMain {
         System.out.println("Program Test");
         
         VMInterface VM = new VehicleModel();
-        viewInterface in  = new View();
-        Presenter VP = new Presenter(VM, in);
-        in.bind(VP);
+        AccidentInterface AI = new AccidentModel();
+        viewInterface VI  = new View();
+        Presenter VP = new Presenter(VM,VI, AI);
+        VI.bind(VP);
         
         //DBConnectiontest Test = new DBConnectiontest();
         
