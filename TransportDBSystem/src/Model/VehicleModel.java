@@ -25,6 +25,7 @@ public class VehicleModel implements VehicleInterface
     Connection c = null;
     public int plateInsert(String numPlate) 
     {
+       
         try
         {
             PreparedStatement insertNewPlate = null;

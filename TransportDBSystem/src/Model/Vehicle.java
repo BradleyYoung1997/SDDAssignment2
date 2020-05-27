@@ -48,4 +48,35 @@ public class Vehicle
         {
             this.phone = phone;
         }
+        
+        public String getNumPlate()
+        {
+            return numPlate;
+        }
+        public String getModel()
+        {
+            return model;
+        }
+        public int getYear()
+        {
+            return year;
+        }
+        public String getOwner()
+        {
+            return owner;
+        }
+        public String getAddress()
+        {
+            return address;
+        }
+        public long getPhone()
+        {
+            return phone;
+        }
+        public String toString()
+        {
+            return "Number Plate: " + getNumPlate() + "Model: " + getModel() + 
+                "Year Made: " + getYear() + "Car Owner: "+ getOwner() + 
+                    "Owner Address: " + getAddress()+ "Phone: " + getPhone();
+        }
 }

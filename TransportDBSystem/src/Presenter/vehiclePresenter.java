@@ -32,4 +32,37 @@ public class vehiclePresenter
         VI.plateInsert(numPlate);
         System.out.println(response);
     }
+    
+    public void insertModel(String model)
+    {
+        System.out.println("Car Model: ");
+        System.out.println(model);
+        
+        VI.modelInsert(model);
+    }
+    public void insertYear(int year)
+    {
+        System.out.println("Year Model: ");
+        System.out.println(year);
+        
+        VI.yearInsert(year);
+    }
+    public void insertOwner(String Owner)
+    {
+        System.out.println("Owner: ");
+        
+        VI.ownerInsert(Owner);
+    }
+    public void insertAddress(String Address)
+    {
+        System.out.println("Address: ");
+        
+        VI.addressInsert(Address);
+    }
+    public void insertPhone(long phone)
+    {
+        System.out.println("Phone: ");
+        
+        VI.phoneInsert(phone);
+    }
 }
