@@ -1,6 +1,7 @@
-package view;
+package QRTAMain;
 
 
+import Presenter.vehiclePresenter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
+import view.viewInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,8 +35,9 @@ import javax.swing.border.BevelBorder;
  *
  * @author Bradey
  */
-public class QRTAEntryForm extends javax.swing.JFrame {
-
+public class QRTAEntryForm extends javax.swing.JFrame implements viewInterface
+{
+    public vehiclePresenter VP;
     /**
      * Creates new form QRTAEntryForm
      */
@@ -502,4 +505,11 @@ public class QRTAEntryForm extends javax.swing.JFrame {
     private JTextPane yearEntry;
     private JLabel yearLabel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void show(vehiclePresenter vp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
 }
