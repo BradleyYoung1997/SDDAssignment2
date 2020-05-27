@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package view;
-
-import Presenter.vehiclePresenter;
+import Model.Vehicle;
+import Presenter.Presenter;
 /**
  *
  * @author Bradey
  */
 public interface viewInterface 
 {
-    public void show(vehiclePresenter vp);
+    public void bind(Presenter VP);
 }

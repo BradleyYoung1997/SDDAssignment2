@@ -16,136 +16,60 @@ import java.sql.SQLException;
  * Date:
  * Purpose: 
  */
-public class VehicleModel implements VehicleInterface
+public class VehicleModel implements VMInterface
 {
 
-    final String URL = "jdbc:derby://localhost:1527/QRTADatabase";
-    final String USERNAME = "Test";
-    final String PASSWORD = "1234";
-    Connection c = null;
-    public int plateInsert(String numPlate) 
+    private static final String URL = "jdbc:derby://localhost:1527/QRTADatabase";
+    private static final String USERNAME = "Test";
+    private static final String PASSWORD = "1234";
+    
+    private Connection c = null;
+    private PreparedStatement searchVehicles = null;
+    private PreparedStatement insertVehicle = null;
+    
+    public int vehicleInsert(String numPlate, String Model, int year, 
+            String owner, String address, long phone) 
     {
-       
+        int result = 0;
         try
         {
-            PreparedStatement insertNewPlate = null;
-            
             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewPlate = c.prepareStatement(
-                    "INSERT INTO TEST.VEHICLE(VEHICLE_ID) VALUES"
-                            + "('"+numPlate+"')");
-            insertNewPlate.executeUpdate();
-            insertNewPlate = c.prepareStatement(
+            insertVehicle = c.prepareStatement(
+                    "INSERT INTO TEST.VEHICLE(VEHICLE_ID, MODEL, MAKE_YEAR"
+                            + "OWNER_NAME, ADDRESS, PHONE) VALUES"
+                            + "(?,?,?,?,?,?)");
+            
+            insertVehicle = c.prepareStatement(
                     "INSERT INTO TEST.ACCIDENT_VEHICLE(VEHICLE_ID)"
                             + "VALUES ('"+numPlate+"')");
-            insertNewPlate.executeUpdate();
+            
+            
+            insertVehicle.setString(1, numPlate);
+            insertVehicle.setString(2, Model);
+            insertVehicle.setInt(3, year);
+            insertVehicle.setString(4, owner);
+            insertVehicle.setString(5, address);
+            insertVehicle.setLong(6, phone);
+            
+            insertVehicle.executeUpdate();
         }
         catch(SQLException e)
         {
             e.printStackTrace();
             System.exit(1);
         }
-        return 0;
-    }
-
-    
-    public int modelInsert(String model) 
+        return result;  
+    }//new Vehicle end
+    public void close()
     {
         try
         {
-            PreparedStatement insertNewModel = null;
-            
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewModel = c.prepareStatement(
-                  "INSERT INTO TEST.VEHICLE(MODLE) VALUES('"+model+"')");
-            insertNewModel.executeUpdate();  
+            c.close();
         }
         catch(SQLException e)
         {
             e.printStackTrace();
-            System.exit(1);
         }
-        return 0;
     }
-
     
-    public int yearInsert(int year) 
-    {
-        try
-        {
-            PreparedStatement insertNewYear = null;
-            
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewYear = c.prepareStatement(
-            "INSERT INTO TEST.VEHICLE(MAKE_YEAR) VALUES("+year+"')");
-            insertNewYear.executeUpdate();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return 0;
-    }
-
-    
-    public int ownerInsert(String owner) 
-    {
-        try
-        {
-            PreparedStatement insertNewOwner = null;
-            
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewOwner = c.prepareStatement(
-            "INSERT INTO TEST.VEHICLE(OWNER_NAME) VALUES("+owner+"')");
-            insertNewOwner.executeUpdate();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return 0;
-    }
-
-    
-    public int addressInsert(String address) 
-    {
-        try
-        {
-            PreparedStatement insertNewAddress = null;
-            
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewAddress = c.prepareStatement(
-            "INSERT INTO TEST.VEHICLE(ADDRESS) VALUES("+address+"')");
-            insertNewAddress.executeUpdate();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return 0;
-    }
-
-    
-    public int phoneInsert(long phone) 
-    {
-        try
-        {
-            PreparedStatement insertNewPhone = null;
-            
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewPhone = c.prepareStatement(
-            "INSERT INTO TEST.VEHICLE(PHONE) VALUES("+phone+"')");
-            insertNewPhone.executeUpdate();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return 0;
-    }
-
 }

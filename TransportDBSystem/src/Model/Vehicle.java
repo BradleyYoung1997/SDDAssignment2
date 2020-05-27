@@ -73,10 +73,5 @@ public class Vehicle
         {
             return phone;
         }
-        public String toString()
-        {
-            return "Number Plate: " + getNumPlate() + "Model: " + getModel() + 
-                "Year Made: " + getYear() + "Car Owner: "+ getOwner() + 
-                    "Owner Address: " + getAddress()+ "Phone: " + getPhone();
-        }
+       
 }

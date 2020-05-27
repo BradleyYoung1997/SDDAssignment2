@@ -7,10 +7,10 @@
 package QRTAMain;
 
 import Model.VehicleModel;
-import Model.VehicleInterface;
+import Model.VMInterface;
+import Presenter.Presenter;
 import view.viewInterface;
-import view.DBConnectiontest;
-import Presenter.vehiclePresenter;
+import view.View;
 
 /*
  * Author: Bradley Young 12110283
@@ -19,17 +19,19 @@ import Presenter.vehiclePresenter;
  */
 public class QRTAMain {
 
-    /**
-     * @param args the command line arguments
-     */
+   
+    
     public static void main(String[] args) 
     {
         System.out.println("Program Test");
         
-        VehicleInterface VI = new VehicleModel();
-        viewInterface Test  = new DBConnectiontest();
-        vehiclePresenter VP = new vehiclePresenter(VI, Test);
-        Test.show(VP);
+        VMInterface VM = new VehicleModel();
+        viewInterface in  = new View();
+        Presenter VP = new Presenter(VM, in);
+        in.bind(VP);
+        
+        //DBConnectiontest Test = new DBConnectiontest();
+        
     }
 
 }
