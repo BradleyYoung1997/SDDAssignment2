@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Author: Bradley Young 12110283
@@ -26,6 +28,11 @@ public class VehicleModel implements VMInterface
     private Connection c = null;
     private PreparedStatement searchVehicles = null;
     private PreparedStatement insertVehicle = null;
+    private PreparedStatement updateModel = null;
+    private PreparedStatement updateYear = null;
+    private PreparedStatement updateOwner = null;
+    private PreparedStatement updateAddress = null;
+    private PreparedStatement updatePhone = null;
     
     public int vehicleInsert(String numPlate, String Model, int year, 
             String owner, String address, long phone) 
@@ -37,12 +44,7 @@ public class VehicleModel implements VMInterface
             insertVehicle = c.prepareStatement(
                     "INSERT INTO TEST.VEHICLE(VEHICLE_ID, MODEL, MAKE_YEAR"
                             + "OWNER_NAME, ADDRESS, PHONE) VALUES"
-                            + "(?,?,?,?,?,?)");
-            
-            insertVehicle = c.prepareStatement(
-                    "INSERT INTO TEST.ACCIDENT_VEHICLE(VEHICLE_ID)"
-                            + "VALUES ('"+numPlate+"')");
-            
+                            + "(?,?,?,?,?,?)");        
             
             insertVehicle.setString(1, numPlate);
             insertVehicle.setString(2, Model);
@@ -60,6 +62,21 @@ public class VehicleModel implements VMInterface
         }
         return result;  
     }//new Vehicle end
+    
+    public int updateModel(String Model)
+    {
+        int result = 0;
+        try
+        {
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            updateModel = c.prepareStatement(
+            "UPDATE TEST.VEHICLE SET MODEL = "+Model+"WHERE VEHICLE_ID = (?)");
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
     public void close()
     {
         try

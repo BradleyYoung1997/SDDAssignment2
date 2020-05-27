@@ -25,66 +25,48 @@ public class AccidentModel implements AccidentInterface
     final String USERNAME = "Test";
     final String PASSWORD = "1234";
     Connection c = null;
-    
-    public int IDInsert(int Acc_ID) 
+    private PreparedStatement searchAccident = null;
+    private PreparedStatement insertAccident = null;
+    private PreparedStatement updateLocation = null;
+    private PreparedStatement updateComments = null;
+    private PreparedStatement updateNumPlate = null;
+       
+    public int insertAccident(String location, String comments, String numPlate) 
     {
+        int result = 0;
         try
         {
-             PreparedStatement insertNewID = null;
-             
-             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-             insertNewID = c.prepareStatement("INSERT INTO TEST.ACCIDENT_VEHICLE"
-                     + "(ACCIDENTID) VALUES ('"+Acc_ID+"')");
-             insertNewID.executeUpdate();
-             
-        } catch (SQLException e) 
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return 0;
-    }
-    
-    public int locInsert(String location) 
-    {
-        try
-        {
-            PreparedStatement insertNewLocation = null;
-            
             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            insertNewLocation = c.prepareStatement(
-                   "INSERT INTO TEST.ACCIDENT(LOCATION) VALUES("+location+"')");
-            insertNewLocation.executeUpdate();
+            insertAccident = c.prepareStatement(
+                    "INSERT INTO TEST.ACCIDENT(LOCATION, COMMENTS) VALUES"
+                            + "(?,?)");
+            
+            insertAccident = c.prepareStatement(
+                    "INSERT INTO TEST.ACCIDENT_VEHICLE(VEHICLE_ID)"
+                            + "VALUES ('"+numPlate+"')");
+            
+            insertAccident.setString(1, location);
+            insertAccident.setString(2, comments); 
+            insertAccident.setString(3, numPlate);
+            
+            insertAccident.executeUpdate();
         }
         catch(SQLException e)
         {
             e.printStackTrace();
             System.exit(1);
         }
-        return 0;
+        return result;
     }
-
-    
-    public int commInsert(String comments) 
+    public void close()
     {
         try
         {
-            PreparedStatement insertNewComments = null;
-            
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD); 
-            insertNewComments = c.prepareStatement(
-                    "INSERT INTO TEST.ACCIDENT(COMMENTS) VALUES('"
-                            +comments+"')");
-            insertNewComments.executeUpdate();
-        } 
-        catch (SQLException e) 
+            c.close();
+        }
+        catch(SQLException e)
         {
             e.printStackTrace();
-            System.exit(1);
         }
-        return 0;
-    }  
-
-    
-    
+    }
 }

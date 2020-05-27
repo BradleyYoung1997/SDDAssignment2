@@ -14,7 +14,6 @@ import java.sql.Date;
  */
 public interface AccidentInterface 
 {
-    public int IDInsert(int Acc_ID);
-    public int locInsert(String location);
-    public int commInsert(String comments);   
+    public int insertAccident(String location, String comments, String numPlate);
+    public void close();
 }
