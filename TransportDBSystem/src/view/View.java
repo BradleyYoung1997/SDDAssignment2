@@ -142,7 +142,7 @@ public class View extends JFrame implements viewInterface
         
         Vehicle.add(getVehicle());
         Vehicle.setLocation(0, 600);
-        Accident.add(getAccident());
+        //Accident.add(getAccident());
         Accident.setLocation(601, 1200);
        
         setVisible(true); 
@@ -167,7 +167,7 @@ public class View extends JFrame implements viewInterface
         
         return vInfo;
     }
-    
+    /*
     private JComponent getAccident()
     {
         JPanel aInfo = new JPanel();
@@ -183,6 +183,7 @@ public class View extends JFrame implements viewInterface
         
         return aInfo;
     }
+    */
     private void newVehicleActionPerformed(ActionEvent e) 
     {
         String numPlate = numPlateText.getText();
@@ -240,5 +241,10 @@ public class View extends JFrame implements viewInterface
     public void show(Presenter pp)
     {
         VP = pp;
+    }
+    
+    public void systemExit()
+    {
+        System.exit(0);
     }
 }

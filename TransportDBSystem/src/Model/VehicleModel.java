@@ -42,9 +42,11 @@ public class VehicleModel implements VMInterface
         int result = 0;
         try
         {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            
             insertVehicle = c.prepareStatement(
-                    "INSERT INTO TEST.VEHICLE(VEHICLE_ID, MODEL, MAKE_YEAR"
+                    "INSERT INTO TEST.VEHICLE(VEHICLE_ID, MODEL, MAKE_YEAR,"
                             + "OWNER_NAME, ADDRESS, PHONE) VALUES"
                             + "(?,?,?,?,?,?)");        
             
@@ -63,6 +65,8 @@ public class VehicleModel implements VMInterface
         {
             e.printStackTrace();
             System.exit(1);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VehicleModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;  
     }//new Vehicle end
