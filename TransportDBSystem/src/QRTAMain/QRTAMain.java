@@ -30,11 +30,8 @@ public class QRTAMain {
         VMInterface VM = new VehicleModel();
         AccidentInterface AI = new AccidentModel();
         viewInterface VI  = new View();
-        Presenter VP = new Presenter(VM,VI, AI);
-        VI.bind(VP);
-        
-        //DBConnectiontest Test = new DBConnectiontest();
-        
+        Presenter VP = new Presenter(VM, VI, AI);
+        VI.show(VP);        
     }
 
 }

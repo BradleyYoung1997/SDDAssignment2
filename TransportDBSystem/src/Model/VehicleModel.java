@@ -9,6 +9,7 @@ package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +34,7 @@ public class VehicleModel implements VMInterface
     private PreparedStatement updateOwner = null;
     private PreparedStatement updateAddress = null;
     private PreparedStatement updatePhone = null;
+    private ResultSet rs;
     
     public int vehicleInsert(String numPlate, String Model, int year, 
             String owner, String address, long phone) 
@@ -54,6 +56,8 @@ public class VehicleModel implements VMInterface
             insertVehicle.setLong(6, phone);
             
             insertVehicle.executeUpdate();
+            result++;
+            c.close();
         }
         catch(SQLException e)
         {
@@ -63,15 +67,21 @@ public class VehicleModel implements VMInterface
         return result;  
     }//new Vehicle end
     
-    public int updateModel(String Model)
+    public int updateModel(String numPlate,String Model)
     {
         int result = 0;
         try
         {
             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             updateModel = c.prepareStatement(
-            "UPDATE TEST.VEHICLE SET MODEL = "+Model+"WHERE VEHICLE_ID = (?)");
-        } catch (SQLException e) 
+            "UPDATE TEST.VEHICLE SET MODEL = ? WHERE VEHICLE_ID = ?");
+            updateModel.setString(1, numPlate);
+            updateModel.setString(2, Model);
+            updateModel.executeUpdate();
+            result++;
+            c.close();
+        } 
+        catch (SQLException e) 
         {
             e.printStackTrace();
         }
@@ -87,6 +97,126 @@ public class VehicleModel implements VMInterface
         {
             e.printStackTrace();
         }
+    }
+
+    public int updateYear(String numPlate, int year) 
+    {
+        int result = 0;
+        
+        try
+        {
+             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            updateYear = c.prepareStatement(
+            "UPDATE TEST.VEHICLE SET MAKE_YEAR = ? WHERE VEHICLE_ID = ?");
+            updateYear.setString(1, numPlate);
+            updateYear.setInt(2, year);
+            
+            updateYear.executeUpdate();
+            result++;
+            c.close();
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updateOwner(String numPlate, String owner) 
+    {
+        int result = 0;
+        
+        try
+        {
+             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            updateOwner = c.prepareStatement(
+            "UPDATE TEST.VEHICLE SET OWNER_NAME = ? WHERE VEHICLE_ID = ?");
+            updateOwner.setString(1, numPlate);
+            updateOwner.setString(2, owner);
+            
+            updateOwner.executeUpdate();
+            result++;
+            c.close();
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updateAddress(String numPlate, String address) 
+    {
+        int result = 0;
+        
+        try
+        {
+             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            updateAddress = c.prepareStatement(
+            "UPDATE TEST.VEHICLE SET OWNER_NAME = ? WHERE VEHICLE_ID = ?");
+            updateAddress.setString(1, numPlate);
+            updateAddress.setString(2, address);
+            
+            updateAddress.executeUpdate();
+            result++;
+            c.close();
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updatePhone(String numPlate, long phone) 
+    {
+        int result = 0;
+        
+        try
+        {
+             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            updateYear = c.prepareStatement(
+            "UPDATE TEST.VEHICLE SET PHONE = ? WHERE VEHICLE_ID = ?");
+            updateYear.setString(1, numPlate);
+            updateYear.setLong(2, phone);
+            
+            updateYear.executeUpdate();
+            result++;
+            c.close();
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean searchVehicle(String numPlate) 
+    {
+        boolean search = false;
+        
+        try
+        {
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            searchVehicles = c.prepareStatement(
+            "SELECT * FROM TEST.VEHICLE WHERE VEHICLE_ID = ?");
+            searchVehicles.setString(1, numPlate);
+            
+            searchVehicles.executeUpdate();
+            rs = searchVehicles.getResultSet();
+            
+            if(rs.next())
+            {
+                rs.getString(1);
+                search = true;
+            }
+            else
+            {
+                search = false;
+            }
+            
+            c.close();
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return search;
     }
     
 }

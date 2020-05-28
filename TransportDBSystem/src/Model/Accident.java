@@ -7,12 +7,16 @@ package Model;
  */
 public class Accident 
 {
-    
+    private int Acc_ID;
     private String location;
     private String comments;
     private int numVehicles;
     private String numPlate;
     
+    public void Acc_ID(int id)
+    {
+        this.Acc_ID = id;
+    }
     public void setLocation(String location)
     {
         this.location = location;
@@ -28,6 +32,10 @@ public class Accident
     public void setNumPlate(String numPlate)
     {
         this.numPlate = numPlate;
+    }
+    public int getAccID()
+    {
+        return Acc_ID;
     }
     public String getLocation()
     {
@@ -47,7 +55,7 @@ public class Accident
     }
     public String toString()
     {
-        return "Location: " + getLocation() + "Comments: " + getComments() + 
+        return "Accident ID: "+getAccID()+"Location:"  + getLocation() + "Comments: " + getComments() + 
                 "Number of Cars: " + getNumVehicles() + " Number Plate(s): "
                 + getNumPlate();
     }

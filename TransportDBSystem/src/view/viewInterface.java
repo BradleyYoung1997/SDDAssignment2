@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import Model.Accident;
 import Model.Vehicle;
 import Presenter.Presenter;
 /**
@@ -12,5 +13,9 @@ import Presenter.Presenter;
  */
 public interface viewInterface 
 {
-    public void bind(Presenter VP);
+    public void show(Presenter VP);
+    public void vDisplay(Vehicle v);
+    public void aDisplay(Accident a);
+    public void MessagePopup(String message);
+    
 }

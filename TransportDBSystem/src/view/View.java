@@ -1,7 +1,9 @@
 package view;
 
+import Model.Accident;
 import Presenter.Presenter;
 import Model.VMInterface;
+import Model.Vehicle;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -26,6 +28,7 @@ public class View extends JFrame implements viewInterface
     
     private JButton newVehicle;
     private JButton newAccident;
+    private JButton update;
     
     private JLabel numPlateLabel;
     private JLabel modelLabel;
@@ -34,12 +37,23 @@ public class View extends JFrame implements viewInterface
     private JLabel addressLabel;
     private JLabel phoneLabel;
     
+    private JLabel AccLabel;
+    private JLabel locationLabel;
+    private JLabel commentLabel;
+    private JLabel numVehicleLabel;
+    
+    
     private JTextField numPlateText;
     private JTextField modelText;
     private JTextField yearText;
     private JTextField ownerText;
     private JTextField addressText;
     private JTextField phoneText;
+    
+    private JTextField AccIDText;
+    private JTextField locationText;
+    private JTextField commentText;
+    private JTextField numVehicleText;
     
     public View()
     {
@@ -49,15 +63,21 @@ public class View extends JFrame implements viewInterface
         Accident = new JPanel();
         Buttons = new JPanel();
         
-        newVehicle = new JButton();
-        newAccident = new JButton();
+        newVehicle = new JButton("New Vehicle");
+        newAccident = new JButton("New Accident");
+        update = new JButton("Update all");
         
-        numPlateLabel = new JLabel();
-        modelLabel = new JLabel();
-        yearLabel = new JLabel();
-        ownerLabel = new JLabel();
-        addressLabel = new JLabel();
-        phoneLabel = new JLabel();
+        numPlateLabel = new JLabel("Vehicle ID: ");
+        modelLabel = new JLabel("Car Model: ");
+        yearLabel = new JLabel("Year Made: ");
+        ownerLabel = new JLabel("Owner: ");
+        addressLabel = new JLabel("Addeess: ");
+        phoneLabel = new JLabel("Phone Number: ");
+        
+        AccLabel = new JLabel();
+        locationLabel = new JLabel();
+        commentLabel = new JLabel();
+        numVehicleLabel = new JLabel();
         
         numPlateText = new JTextField(10);
         modelText = new JTextField(20);
@@ -65,6 +85,11 @@ public class View extends JFrame implements viewInterface
         ownerText = new JTextField(30);
         addressText = new JTextField(50);
         phoneText = new JTextField(10);
+        
+        AccIDText = new JTextField(3);
+        locationText = new JTextField(70);
+        commentText = new JTextField(100);
+        numVehicleText = new JTextField(3);
         
         this.setLayout(new BorderLayout());
         setSize(1200, 750);
@@ -75,6 +100,7 @@ public class View extends JFrame implements viewInterface
         Buttons.setSize(1200, 70);
         Buttons.add(newVehicle);
         Buttons.add(newAccident);
+        Buttons.add(update);
         
         newVehicle.addActionListener(
                 new ActionListener()
@@ -100,13 +126,26 @@ public class View extends JFrame implements viewInterface
                 }
             );
         
+        update.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        updateActionPerformed(e);
+                    }
+                }
+            );
+        
         add(Buttons, BorderLayout.SOUTH);
-        add(Vehicle, BorderLayout.PAGE_START);
+        add(Vehicle, BorderLayout.NORTH);
         add(Accident, BorderLayout.PAGE_END);
         
         Vehicle.add(getVehicle());
+        Vehicle.setLocation(0, 600);
+        Accident.add(getAccident());
         Accident.setLocation(601, 1200);
-        
+       
+        setVisible(true); 
     }
     
     private JComponent getVehicle()
@@ -128,6 +167,22 @@ public class View extends JFrame implements viewInterface
         
         return vInfo;
     }
+    
+    private JComponent getAccident()
+    {
+        JPanel aInfo = new JPanel();
+        aInfo.setLayout(new GridLayout(4,4));
+        aInfo.add(AccLabel);
+        aInfo.add(AccIDText);
+        aInfo.add(locationLabel);
+        aInfo.add(locationText);
+        aInfo.add(commentLabel);
+        aInfo.add(commentText);
+        aInfo.add(numVehicleLabel);
+        aInfo.add(numVehicleText);
+        
+        return aInfo;
+    }
     private void newVehicleActionPerformed(ActionEvent e) 
     {
         String numPlate = numPlateText.getText();
@@ -141,10 +196,48 @@ public class View extends JFrame implements viewInterface
     
     private void newAccidentActionPerformed(ActionEvent e) 
     {
-        
+        String location = locationText.getText();
+        String comments = commentText.getText();
+        String numPlate = numPlateText.getText();
+        VP.AccidentInsert(location, comments, numPlate);
     }
     
-    public void bind(Presenter pp)
+    private void updateActionPerformed(ActionEvent e)
+    {
+        String numPlate = numPlateText.getText();
+        int Acc_ID = Integer.parseInt(AccIDText.getText());
+        String Model = modelText.getText();
+        int year = Integer.parseInt(yearText.getText());
+        String owner = ownerText.getText();
+        String address = addressText.getText();
+        long phone = Long.parseLong(phoneText.getText());
+        String location = locationText.getText();
+        String comments = commentText.getText();
+        VP.update(numPlate, Acc_ID, Model, year, owner, address, phone, location, comments);
+    }
+    
+    public void vDisplay(Vehicle v)
+    {
+        numPlateText.setText("" + v.getNumPlate());
+        modelText.setText("" + v.getModel());
+        yearText.setText("" + v.getYear());
+        ownerText.setText("" + v.getOwner());
+        addressText.setText("" + v.getAddress());
+        phoneText.setText(""+ v.getPhone());
+    }
+    public void aDisplay(Accident a)
+    {
+        AccIDText.setText("" + a.getAccID());
+        locationText.setText("" + a.getLocation());
+        commentText.setText("" + a.getComments());
+    }
+    
+    public void MessagePopup(String message)
+    {
+        JOptionPane.showMessageDialog(this, message);
+    }
+    
+    public void show(Presenter pp)
     {
         VP = pp;
     }
