@@ -14,7 +14,7 @@ import java.sql.Date;
  */
 public interface AccidentInterface 
 {
-    public int insertAccident(String location, String comments, String numPlate);
+    public int insertAccident(String location, String comments);
     public int updateLocation(int Acc_ID, String location);
     public int updateComments(int Acc_ID, String comments);
     public int updateNumPlate(int Acc_ID, String numPlate);

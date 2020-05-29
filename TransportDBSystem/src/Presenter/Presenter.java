@@ -93,10 +93,10 @@ public class Presenter
     
     public void AccidentInsert(String location, String comments, String numPlate)
     {
-        int Aresult = AI.insertAccident(location, comments, numPlate);
+        int Aresult = AI.insertAccident(location, comments);
         if (Aresult == 1)
         {
-             System.out.println("Accident was not added");
+            System.out.println("Accident was added");
         }
         else
         {
@@ -113,7 +113,7 @@ public class Presenter
         }
         else
         {
-            IV.MessagePopup("Vehicle not found");
+            IV.Display("Vehicle not found");
         }
     }
     public void accidentSearch(int Acc_ID)
@@ -125,7 +125,7 @@ public class Presenter
         }
         else
         {
-            IV.MessagePopup("Accident not found");
+            IV.Display("Accident not found");
         }
     }
 }

@@ -34,31 +34,30 @@ public class AccidentModel implements AccidentInterface
     private PreparedStatement updateNumPlate = null;
     private ResultSet rs;
        
-    public int insertAccident(String location, String comments, String numPlate) 
+    public int insertAccident(String location, String comments) 
     {
         int result = 0;
         try
         {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             insertAccident = c.prepareStatement(
-                    "INSERT INTO TEST.ACCIDENT(LOCATION, COMMENTS) VALUES"
-                            + "(?,?)");
-            
-            insertAccident = c.prepareStatement(
-                    "INSERT INTO TEST.ACCIDENT_VEHICLE(VEHICLE_ID)"
-                            + "VALUES ('"+numPlate+"')");
-            
+                    "INSERT INTO TEST.ACCIDENT(LOCATION, COMMENTS) VALUES (?,?)");
+                        
             insertAccident.setString(1, location);
             insertAccident.setString(2, comments); 
-            insertAccident.setString(3, numPlate);
+            
             
             insertAccident.executeUpdate();
+            result++;
             c.close();
         }
         catch(SQLException e)
         {
             e.printStackTrace();
             System.exit(1);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccidentModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }

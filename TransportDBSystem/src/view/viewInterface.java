@@ -16,6 +16,5 @@ public interface viewInterface
     public void show(Presenter VP);
     public void vDisplay(Vehicle v);
     public void aDisplay(Accident a);
-    public void MessagePopup(String message);
-    
+    public void Display(String Message);
 }
