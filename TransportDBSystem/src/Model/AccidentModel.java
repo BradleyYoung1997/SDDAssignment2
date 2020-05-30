@@ -26,6 +26,7 @@ public class AccidentModel implements AccidentInterface
     final String USERNAME = "Test";
     final String PASSWORD = "1234";
     Connection c = null;
+    private PreparedStatement getAccIDList = null;
     private PreparedStatement searchAccident = null;
     private PreparedStatement insertAccident = null;
     private PreparedStatement updateLocation = null;
@@ -34,13 +35,47 @@ public class AccidentModel implements AccidentInterface
     private PreparedStatement updateNumPlate = null;
     private ResultSet rs;
        
-    public int insertAccident(String location, String comments) 
+     public void DataBaseConnection()
+    {        
+            try
+            {
+                Class.forName("org.apache.derby.jdbc.ClientDriver");
+                c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                System.out.println("Database is online");
+                
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }      
+        
+    }
+    
+    public int getAccidents()
     {
         int result = 0;
         try
         {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            getAccIDList = c.prepareStatement("SELECT * FROM TEST.ACCIDENT");
+            
+            
+            getAccIDList.executeQuery();
+           
+            result++;
+            c.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return result;
+        
+    }
+    public int insertAccident(String location, String comments, int numVehicles) 
+    {
+        int result = 0;
+        try
+        {
             insertAccident = c.prepareStatement(
                     "INSERT INTO TEST.ACCIDENT(LOCATION, COMMENTS) VALUES (?,?)");
                         
@@ -56,9 +91,7 @@ public class AccidentModel implements AccidentInterface
         {
             e.printStackTrace();
             System.exit(1);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AccidentModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return result;
     }
     public void close()
@@ -145,10 +178,10 @@ public class AccidentModel implements AccidentInterface
         {
             c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             searchAccident = c.prepareStatement(
-            "SELECT * FROM TEST.ACCIDENT WHERE ACCIDNET_ID = ?");
+            "SELECT * FROM TEST.ACCIDENT WHERE ACCIDENTID = ?");
             searchAccident.setInt(1, Acc_ID);
             
-            searchAccident.executeUpdate();
+            searchAccident.executeQuery();
             rs = searchAccident.getResultSet();
             
             if(rs.next())
@@ -168,4 +201,6 @@ public class AccidentModel implements AccidentInterface
         }
         return search;
     }
+
+   
 }

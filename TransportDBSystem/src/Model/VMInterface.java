@@ -20,6 +20,7 @@ public interface VMInterface
     public int updateOwner(String numPlate,String owner);
     public int updateAddress(String numPlate,String address);
     public int updatePhone(String numPlate,long phone);
-    public boolean searchVehicle(String Model);
+    public boolean searchVehicle(String numPlate);
+    public int damagedVehicle(String numPlate);
     public void close();
 }

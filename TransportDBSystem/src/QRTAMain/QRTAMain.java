@@ -12,7 +12,7 @@ import Model.VehicleModel;
 import Model.VMInterface;
 import Presenter.Presenter;
 import view.viewInterface;
-import view.View;
+import view.QRTAEntryForm;
 
 /*
  * Author: Bradley Young 12110283
@@ -29,7 +29,7 @@ public class QRTAMain {
         
         VMInterface VM = new VehicleModel();
         AccidentInterface AI = new AccidentModel();
-        viewInterface VI  = new View();
+        viewInterface VI  = new QRTAEntryForm();
         Presenter VP = new Presenter(VM, VI, AI);
         VI.show(VP);        
     }

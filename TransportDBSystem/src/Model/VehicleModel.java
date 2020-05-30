@@ -28,6 +28,7 @@ public class VehicleModel implements VMInterface
     
     private Connection c = null;
     private PreparedStatement searchVehicles = null;
+    private PreparedStatement damagedVehicles = null;
     private PreparedStatement insertVehicle = null;
     private PreparedStatement updateModel = null;
     private PreparedStatement updateYear = null;
@@ -202,12 +203,18 @@ public class VehicleModel implements VMInterface
             "SELECT * FROM TEST.VEHICLE WHERE VEHICLE_ID = ?");
             searchVehicles.setString(1, numPlate);
             
-            searchVehicles.executeUpdate();
+                    
+            searchVehicles.executeQuery();
             rs = searchVehicles.getResultSet();
             
             if(rs.next())
             {
                 rs.getString(1);
+                rs.getString(2);
+                rs.getInt(3);
+                rs.getString(4);
+                rs.getString(5);
+                rs.getLong(6);
                 search = true;
             }
             else
@@ -221,6 +228,30 @@ public class VehicleModel implements VMInterface
             e.printStackTrace();
         }
         return search;
+    }
+
+   
+    public int damagedVehicle(String numPlate) 
+    {
+        int Damage = 0;
+        
+        try 
+        {
+            c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            damagedVehicles = c.prepareStatement(
+            "INSERT INTO TEST.ACCIDENT_VEHICLE (VEHICLE_ID)"+
+            "VALUES (?)");
+            
+            damagedVehicles.setString(1, numPlate);
+            
+            damagedVehicles.executeUpdate();
+            Damage++;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(VehicleModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Damage;
     }
     
 }
